@@ -2,8 +2,10 @@ var Queue = function() { // queue = new Queue
   // var counter = 0;
   var someInstance = {
     counter: 0,
-    storage: {}
+    storage: {
+    }
   };
+
 
   _.extend(someInstance, queueMethods);
 

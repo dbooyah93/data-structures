@@ -21,7 +21,7 @@ var stackMethods = {
   },
 
   pop: function() {
-    let keys = object.keys(this.storage);
+    let keys = Object.keys(this.storage);
     let deleteKey = keys[keys.length - 1];
     let tmpVar = this.storage[deleteKey];
 
