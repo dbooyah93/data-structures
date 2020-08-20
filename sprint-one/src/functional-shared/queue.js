@@ -1,5 +1,4 @@
-var Queue = function() { // queue = new Queue
-  // var counter = 0;
+var Queue = function() {
   var someInstance = {
     counter: 0,
     storage: {
@@ -33,19 +32,10 @@ var queueMethods = {
 
   size: function() {
     console.log('test;', this.storage, this);
-    return Object.keys(this.storage).length; // queue = new Queue
-    // queue.size
+    return Object.keys(this.storage).length;
+
   }
 };
 
 let queue = new Queue;
 console.log(queue.size);
-
-// Hey! Rewrite in the new style. Your code will wind up looking very similar,
-// but try not not reference your old code in writing the new style.
-
-// create an object that holds the methods that will be shared by all instances
-// use keyword `this`
-// use _.extend to copy the methods onto the instance
-
-// attach queueMethods
