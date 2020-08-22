@@ -5,9 +5,14 @@ var Graph = function() {
 
   this.vertices = {
     /**
-     * 1: {
+     * :1 {
      *    value: 1
-     *    edges: [];
+     *    edges: [2, 3, 4, 99]; // bridges connections between other nodes like 2 WILL NOT PUT MORE VERTICES IN HERE
+     * },
+     *
+     * 2: {
+     *    value: 2
+     *    edges: [1];
      * }
      */
   };
@@ -25,12 +30,6 @@ Graph.prototype.addNode = function(node) {
     'edges': []
   };
 
-  // this.edges = []; // {5: {name2: true} , name2: {name1: true}}
-  // selects new object and adds a variable that === [];
-
-  // {name : {}}
-  // let selector = this.edges;
-  // selector[node] = {};
 };
 
 // Return a boolean value indicating if the value passed to contains is represented in the graph.
@@ -47,15 +46,6 @@ Graph.prototype.removeNode = function(node) {
   let reference = this.vertices; // vertices = {};
   let bridges = this.edges;
 
-  // delete bridges[node];
-
-  // for (var key in bridges) {
-  //   if (bridges[key] === node) {
-  //     delete bridges[key];
-  //   }
-  // }
-
-  // delete bridges[node];
   delete reference[node];
 
 };
@@ -81,17 +71,11 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
 // Connects two nodes in a graph by adding an edge between them.
 Graph.prototype.addEdge = function(fromNode, toNode) { // (2, 3) (4, 3),
 
-  // let fromRef =
   let fromEdges = this.vertices[fromNode].edges;
   fromEdges.push(toNode);
-  // let toRef =
+
   let toEdges = this.vertices[toNode].edges;
   toEdges.push(fromNode);
-
-  // fromRef.push(toNode);
-  // toRef.push(fromNode);
-
-  // reference[toNode] = fromNode;
 
 };
 
@@ -110,11 +94,26 @@ Graph.prototype.removeEdge = function(fromNode, toNode) {
 
 };
 
+/**
+ * let cb = function (a, bunch, o, arguments) {
+ *  somethingTo(arguments)
+ * }
+ *
+    var connectToFive = function(item) {
+      graph.addEdge(item, 5);
+    };
+
+ */
+
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
 
+  for (let key in this.vertices) {
+    cb(this.vertices[key].value);
 
+    // cb.apply(this.vertices[key], arguments);
 
+  }
 
 };
 
