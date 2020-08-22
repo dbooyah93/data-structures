@@ -2,23 +2,43 @@ var LinkedList = function() {
   var list = {};
   list.head = null;
   list.tail = null;
-  //LinkedList.addToTail('Aziz')
+
   list.addToTail = function(value) {
-    let tailNode = node(value);
+    let tailNode = Node(value);
     if (list.head === null && list.tail === null) {
       list.head = tailNode;
       list.tail = tailNode;
-    } else
+    } else {
+      list.tail.next = tailNode;
+      list.tail = tailNode;
+    }
   };
 
   list.removeHead = function() {
+    if ( list.head === null || list.tail === null ) {
+      return;
+    } else {
+      let tmpVar = list.head.value;
+      list.head = list.head.next;
+      return tmpVar;
+    }
+
   };
 
   list.contains = function(target) {
+    let cursor = list.head;
+    while ( cursor !== null ) {
+      if (cursor.value === target) {
+        return true;
+      }
+      cursor = cursor.next;
+    }
+    return false;
   };
-
   return list;
 };
+
+
 
 var Node = function(value) { // bucket (structure)
   var node = {};// linked names
