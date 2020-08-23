@@ -43,24 +43,40 @@ let binaryMethods = {};
  * a new home is found
  *
  */
-binaryMethods.insert = function(current) {
-
+binaryMethods.insert = function(input) {
+  let root = this;
   // if ( left is empty object and value is less than current ) { insert }
   // if ( right is empty object and value is more than current ) { insert }
-  // if ( less than current && more than left ) { move left down and left, insert current }
-  // if ( more than current && less than right ) { take current's place and place current to it's left (shifting everything to the left) }
-  if ( this.left === {} && current < this.value ) {
-    this.left = BinarySearchTree(current);
-  }
+  // if ( input is less than current && more than left ) { move left down and left, insert current }
+  // if ( input is more than current && less than right ) { take current's place and place current to it's left (shifting everything to the left) }
 
-  if ( this.right === {} && current > this.value ) {
-    this.right = BinarySearchTree(current);
-  }
+  let traverse = function(branch) {
 
-  if ( this.)
+    if ( branch.left === {} && input < branch.value ) {
+      branch.left = BinarySearchTree(input);
+      return;
+    }
 
-  if (  )
+    if ( branch.right === {} && input > branch.value ) {
+      branch.right = BinarySearchTree(input);
+      return;
+    }
 
+    if ( input < branch.value && input > branch.left ) {
+      let tmpValue = branch.value;
+      branch.value = input;
+      root.insert(tmpValue);
+    }
+
+    if ( input > branch.value && input < branch.right ) {
+      var tmpValue = branch.value;
+      branch.value = input;
+      root.insert(tmpValue);
+    }
+
+  };
+
+  traverse(root);
 };
 
 binaryMethods.left = function() {
