@@ -1,3 +1,37 @@
+
+/******* SELF BALANCING BINARY SEARCH TREE *****/
+// binaryMethods.insert = function(input) {
+//   let root = this;
+
+//   let traverse = function(branch) {
+//     if ( Object.keys(branch.left).length === 0 && input < branch.value ) {
+//       branch.left = BinarySearchTree(input);
+//       return;
+//     }
+
+//     if ( Object.keys(branch.right).length === 0 && input > branch.value ) {
+//       branch.right = BinarySearchTree(input);
+//       return;
+//     }
+
+//     // less than needs to go left
+
+//     if ( input < branch.value && input > branch.left.value ) {
+//       let tmpValue = branch.value;
+//       branch.value = input;
+//       root.insert(tmpValue);
+//     }
+
+//     if ( input > branch.value && input < branch.right.value ) {
+//       var tmpValue = branch.value;
+//       branch.value = input;
+//       root.insert(tmpValue);
+//     }
+//   };
+//   traverse(root);
+// };
+
+
 var BinarySearchTree = function(value) {
 
   let tree = Object.create(binaryMethods);
@@ -62,42 +96,72 @@ binaryMethods.insert = function(input) {
       return;
     }
 
-    if ( input < branch.value && input > branch.left ) {
-      let tmpValue = branch.value;
-      branch.value = input;
-      root.insert(tmpValue);
-
+    if ( input < branch.value ) {
+      return traverse(branch.left);
     }
 
-    if ( input > branch.value && input < branch.right ) {
-      var tmpValue = branch.value;
-      branch.value = input;
-      root.insert(tmpValue);
+    if ( input > branch.value ) {
+      return traverse(branch.right);
     }
 
   };
 
-  traverse(root);
-};
-
-binaryMethods.left = function() {
-
-  return this.left;
-
-};
-
-binaryMethods.right = function() {
-
-  return this.right;
+  return traverse(this);
 
 };
 
 
-binaryMethods.contains = function() {
+binaryMethods.contains = function(inspect) {
+
+  let root = this;
+
+  let traverse = function (branch) {
+
+    if ( Object.keys(branch.left).length === 0 && inspect < branch.value ) {
+      return false;
+    }
+    if ( Object.keys(branch.right).length === 0 && inspect > branch.value ) {
+      return false;
+    }
+    if ( inspect === branch.value ) {
+      return true;
+    } else if ( inspect < branch.value ) {
+      return traverse(branch.left);
+    } else if ( inspect > branch.value ) {
+      return traverse(branch.right);
+    }
+
+  };
+
+  return traverse(root);
 
 };
 
-binaryMethods.depthFirstLog = function() {
+
+binaryMethods.depthFirstLog = function(cb) {
+
+  let root = this;
+  // let result =
+  // if ( left { full } ) { traverse left }
+  // else if ( right { full } ){ traverse right }
+  // else if ( right {} )
+
+
+
+
+  let depthFirstSearch = function (treeNode) {
+    cb(treeNode.value);
+    if ( (Object.keys(treeNode.left).length) > 0 ) {
+      depthFirstSearch(treeNode.left);
+    }
+
+    if ( (Object.keys(treeNode.right).length) > 0 ) {
+      depthFirstSearch(treeNode.right);
+    }
+
+  };
+
+  depthFirstSearch(root);
 
 };
 
@@ -105,3 +169,4 @@ binaryMethods.depthFirstLog = function() {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
