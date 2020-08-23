@@ -1,7 +1,7 @@
 var BinarySearchTree = function(value) {
 
   let tree = Object.create(binaryMethods);
-  tree[value] = value;
+  tree.value = value;
 
   tree.left = {};
   tree.right = {};
@@ -52,12 +52,12 @@ binaryMethods.insert = function(input) {
 
   let traverse = function(branch) {
 
-    if ( branch.left === {} && input < branch.value ) {
+    if ( Object.keys(branch.left).length === 0 && input < branch.value ) {
       branch.left = BinarySearchTree(input);
       return;
     }
 
-    if ( branch.right === {} && input > branch.value ) {
+    if ( Object.keys(branch.right).length === 0 && input > branch.value ) {
       branch.right = BinarySearchTree(input);
       return;
     }
@@ -66,6 +66,7 @@ binaryMethods.insert = function(input) {
       let tmpValue = branch.value;
       branch.value = input;
       root.insert(tmpValue);
+
     }
 
     if ( input > branch.value && input < branch.right ) {
